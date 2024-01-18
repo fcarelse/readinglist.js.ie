@@ -1,0 +1,24 @@
+<table class="table">
+	<tr>
+		<th class="col-status">Status</th>
+		<th class="col-title">Title</th>
+		<th class="col-isbn">ISBN</th>
+		<th class="col-author">Author</th>
+		<th class="col-actions">Actions</th>
+	</tr>
+	<tr ng-repeat="book in data.booklist.list">
+		<td>
+			<select ng-options="status.tag as status.label for status in data.booklist.statuses" ng-model="book.status">
+
+			</select>
+		</td>
+		<td><a editable-text="book.title" onaftersave="data.booklist.change(book.id, 'title', book.title)">{{book.title}}</a></td>
+		<td><a editable-text="book.ISBN" onaftersave="data.booklist.change(book.id, 'ISBN', book.ISBN)">{{book.ISBN}}</a></td>
+		<td><a editable-text="book.author" onaftersave="data.booklist.change(book.id, 'author', book.author)">{{book.author}}</a></td>
+		<td>
+			<i class="fa-solid fa-plus pointer" ng-click="data.booklist.add({}, $index)" title="Add Book"></i>
+			&nbsp;
+			<i class="fa-solid fa-trash pointer" ng-click="data.booklist.remove(book.id)" title="Remove Book"></i>
+		</td>
+	</tr>
+</table>
