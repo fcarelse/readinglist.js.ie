@@ -1,0 +1,16 @@
+{
+  "name": "@fcarelse/readinglist",
+  "version": "0.1.0",
+  "description": "Simple Reading List",
+  "main": "index.js",
+  "scripts": {
+    "docs": "npx http-server docs",
+    "test": "npx jest"
+  },
+  "keywords": [
+    "book",
+    "list"
+  ],
+  "author": "Francis Carelse",
+  "license": "UNLICENSED"
+}
