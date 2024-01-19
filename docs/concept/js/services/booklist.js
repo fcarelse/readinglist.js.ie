@@ -15,8 +15,8 @@ app.factory('Booklist', ['Book', 'Utils', function (Book, Utils) {
 			Booklist.save()
 		}
 
-		remove(id) {
-			this.list = this.list.filter(book => book.id != id);
+		remove(index) {
+			this.list.splice(index, 1);
 			Booklist.save()
 		}
 
@@ -27,7 +27,22 @@ app.factory('Booklist', ['Book', 'Utils', function (Book, Utils) {
 		}
 
 		static import() {
-			// TBD
+			$('#importBooklist').click();
+		}
+
+		loadFile() {
+			const uploaderElement = document.getElementById("importBooklist");
+			const reader = new FileReader();
+			reader.readAsText(uploaderElement.files[0]);
+			reader.onload = function (loadEvent) {
+				const newList = Utils.jsonToArray(loadEvent.target.result);
+				if (newList) {
+					data.booklist.list = Utils.jsonToArray(loadEvent.target.result);
+				}
+				Booklist.save();
+				Utils.safeApply();
+				console.log(loadEvent.target.result);
+			};
 		}
 
 		static export() {

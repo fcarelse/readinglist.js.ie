@@ -1,4 +1,4 @@
-app.factory('Utils', [function () {
+app.factory('Utils', ['$rootScope', function ($rootScope) {
 	const Utils = sys.Utils = {};
 
 	Utils.isString = (str) => str instanceof String || typeof (str) == 'string';
@@ -35,6 +35,41 @@ app.factory('Utils', [function () {
 		for (var i = 0; i < arr.length; i++)
 			if (arr[i][field] !== undefined) delete arr[i][field];
 		return arr;
+	};
+
+	Utils.jsonToArray = function (jsonArray) {
+		var s = [];
+		try {
+			s = JSON.parse(jsonArray);
+		} catch (e) {
+			s = [];
+		}
+		return s;
+	};
+
+	Utils.arrayToJson = function (array, clearHashKey) {
+		var s = '[]';
+		if (!(array instanceof Array)) return s;
+		if (clearHashKey)
+			Util.clearField(array, '$$hashKey');
+		try {
+			s = JSON.stringify(array);
+		} catch (e) {
+			s = '[]';
+		}
+		return s;
+	};
+
+	var applyQueued;
+	$rootScope.safeApply = Utils.safeApply = function () {
+		if (!$rootScope.$$phase) {
+			$rootScope.$apply();
+			applyQueued = false;
+		}
+		else {
+			if (!applyQueued) setTimeout(Utils.safeApply, 1000);
+			applyQueued = true;
+		}
 	};
 
 	// Technically does nothing, but triggers lit-html plugin for vscode to provide syntax highlighting for html code.
