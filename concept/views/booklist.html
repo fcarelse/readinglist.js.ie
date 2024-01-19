@@ -8,17 +8,42 @@
 	</tr>
 	<tr ng-repeat="book in data.booklist.list">
 		<td>
-			<select ng-options="status.tag as status.label for status in data.booklist.statuses" ng-model="book.status">
-
-			</select>
+			<select
+				ng-options="status.tag as status.label for status in sys.Booklist.statuses"
+				ng-model="book.status"
+				ng-change="sys.Booklist.save()"
+			></select>
 		</td>
-		<td><a editable-text="book.title" onaftersave="data.booklist.change(book.id, 'title', book.title)">{{book.title}}</a></td>
-		<td><a editable-text="book.ISBN" onaftersave="data.booklist.change(book.id, 'ISBN', book.ISBN)">{{book.ISBN}}</a></td>
-		<td><a editable-text="book.author" onaftersave="data.booklist.change(book.id, 'author', book.author)">{{book.author}}</a></td>
 		<td>
-			<i class="fa-solid fa-plus pointer" ng-click="data.booklist.add({}, $index)" title="Add Book"></i>
+			<a
+				editable-text="book.title"
+				onaftersave="data.booklist.change(book.id, 'title', book.title)"
+			>{{book.title || '&lt;No Title&gt;'}}</a>
+		</td>
+		<td>
+			<a
+				editable-text="book.ISBN"
+				onaftersave="data.booklist.change(book.id, 'ISBN', book.ISBN)"
+			>{{book.ISBN || '&lt;No ISBN&gt;'}}</a>
+		</td>
+		<td>
+			<a
+				editable-text="book.author"
+				onaftersave="data.booklist.change(book.id, 'author', book.author)"
+			>{{book.author || '&lt;No Author&gt;'}}</a>
+		</td>
+		<td>
+			<i
+				class="fa-solid fa-plus pointer"
+				ng-click="data.booklist.add({}, $index)"
+				title="Add Book"
+			></i>
 			&nbsp;
-			<i class="fa-solid fa-trash pointer" ng-click="data.booklist.remove(book.id)" title="Remove Book"></i>
+			<i
+				class="fa-solid fa-trash pointer"
+				ng-click="data.booklist.remove(book.id)"
+				title="Remove Book"
+			></i>
 		</td>
 	</tr>
 </table>

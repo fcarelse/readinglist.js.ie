@@ -16,13 +16,12 @@ app.controller('Main', ['$rootScope', 'Booklist', 'Book', function ($rootScope, 
 		}
 	};
 
-	data.booklist = new Booklist([
-		new Book({
-			status: 'unread',
-			title: 'First Book',
-			ISBN: '00001',
-			author: 'Ann Noni-Mouse'
-		})
-	])
+	Booklist.load();
+	if (data.booklist.list.length == 0) data.booklist.add(new Book({
+		status: 'unread',
+		title: 'First Book',
+		ISBN: '00001',
+		author: 'Ann Noni-Mouse'
+	}));
 
 }]);

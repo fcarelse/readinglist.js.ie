@@ -4,3 +4,8 @@
 .col-author{ width: 200px }
 .col-actions{ width: 50px }
 
+.table {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
