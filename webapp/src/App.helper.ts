@@ -3,6 +3,10 @@ import { BookListType } from "./pages/booklist/booklist.types";
 
 export type RecordArray = Array<Record<string, any>>;
 
+export const byField = function (arr: RecordArray, field: string, value: any) {
+	return arr.filter((item) => item[field] === value)[0];
+};
+
 export const listValues = function (arr: RecordArray, key: string) {
 	var list = [];
 	if (arr === undefined) {

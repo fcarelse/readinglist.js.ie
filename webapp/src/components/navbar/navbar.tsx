@@ -6,6 +6,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { NavbarProps } from "./navbar.types";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { SaveAlt, UploadFile } from "@mui/icons-material";
 
 export const Navbar = (props: NavbarProps) => {
 	const { importList, exportList } = props;
@@ -19,10 +22,28 @@ export const Navbar = (props: NavbarProps) => {
 						variant="h6"
 						sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
 					>
-						Reading List
+						Reading Book List
 					</Typography>
-					<Button onClick={() => importList()}>Import</Button>
-					<Button onClick={() => exportList()}>Export</Button>
+					<Box>
+						<IconButton
+							color="inherit"
+							size="large"
+							aria-label="Import from file"
+							title="Import from file"
+							onClick={() => importList()}
+						>
+							<UploadFile />
+						</IconButton>
+						<IconButton
+							color="inherit"
+							size="large"
+							aria-label="Export to file"
+							title="Export to file"
+							onClick={() => exportList()}
+						>
+							<SaveAlt />
+						</IconButton>
+					</Box>
 				</Toolbar>
 			</AppBar>
 		</Box>

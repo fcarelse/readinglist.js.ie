@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BookListType } from "./pages/booklist/booklist.types";
 import { BookList } from "./pages/booklist/booklist";
 import { Navbar } from "./components/navbar/navbar";
-import { STATUS_TAGS, copyList, load, save } from "./App.helper";
+import { STATUS_TAGS, copyList, jsonToArray, load, save } from "./App.helper";
 import { ListExporter } from "./App.types";
 import "./App.css";
 import moment from "moment";
@@ -14,13 +14,18 @@ function App() {
 
 	useEffect(() => {
 		(async () => {
-			const loaded = await load();
+			const loaded: BookListType = await load();
+			if (loaded.length === 0) loaded.push(genBlankBook());
+			loaded.forEach((book: BookType) => {
+				if (!STATUS_TAGS.includes(book.status)) book.status = STATUS_TAGS[0];
+			});
 			setList(loaded);
+			save(loaded);
 		})();
 	}, []);
 
 	const importList = () => {
-		document?.getElementById("uploader")?.click();
+		document?.getElementById("importBooklist")?.click();
 	};
 
 	const loadFile = () => {
@@ -28,13 +33,12 @@ function App() {
 		const reader = new FileReader();
 		// @ts-ignore
 		reader.readAsText(uploaderElement.files[0]);
-		reader.onload = function (loadEvent) {
+		reader.onload = (loadEvent) => {
 			// @ts-ignore
 			const newList = jsonToArray(loadEvent?.target?.result);
 			if (newList) {
-				// @ts-ignore
-				const list = jsonToArray(loadEvent?.target?.result);
-				setList(list);
+				setList(newList);
+				save(newList);
 			}
 		};
 	};
@@ -87,7 +91,7 @@ function App() {
 			<BookList list={list} change={change} append={append} remove={remove} />
 			<div className="hidden">
 				<input
-					id="uploader"
+					id="importBooklist"
 					type="file"
 					accept="application/json"
 					onChange={loadFile}
