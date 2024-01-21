@@ -12,7 +12,7 @@ app.factory('Utils', ['$rootScope', function ($rootScope) {
 
 	Utils.listValues = function (arr, key) {
 		var list = [];
-		if (arr === undefined && !(ea.global.user && ea.global.user.id == 2550)) {
+		if (arr === undefined) {
 			console.error('Array Undefined');
 			return [];
 		}
