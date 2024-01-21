@@ -39,7 +39,7 @@ export const Book = ({ ...book }: BookPropsType) => {
 		>
 			<Box>
 				<Select
-					sx={{ margin: cellMargin }}
+					sx={{ margin: cellMargin, width: "150px" }}
 					title="Status"
 					label="Status"
 					value={book.status}
