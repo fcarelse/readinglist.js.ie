@@ -1,16 +1,15 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { BookPropsType } from "./book.types";
 import TextField from "@mui/material/TextField";
 import {
 	Box,
 	Button,
-	FormControl,
 	MenuItem,
 	Select,
 	SelectChangeEvent,
 } from "@mui/material";
 import { Delete, PlusOne } from "@mui/icons-material";
-import { BOOK_STATUSES, byField } from "../../App.helper";
+import { BOOK_STATUSES } from "../../App.helper";
 
 export const Book = ({ ...book }: BookPropsType) => {
 	const changed =
@@ -21,7 +20,8 @@ export const Book = ({ ...book }: BookPropsType) => {
 		};
 
 	const changedStatus =
-		(field: keyof BookPropsType) => (changeEvent: SelectChangeEvent) => {
+		(field: keyof BookPropsType) =>
+		(changeEvent: SelectChangeEvent<string>) => {
 			// @ts-ignore
 			book.change(book.index, field, changeEvent.target?.value || "");
 		};

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BookListType } from "./pages/booklist/booklist.types";
 import { BookList } from "./pages/booklist/booklist";
 import { Navbar } from "./components/navbar/navbar";
