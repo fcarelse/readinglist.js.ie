@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "docs": "npx http-server docs",
+    "predeploy": "cd webapp & npm run build",
+    "deploy": "rm -rf docs & mkdir docs & cp -r webapp/build/* docs",
+    "postdeploy": "cp -r concept docs/.",
     "test": "npx jest"
   },
   "keywords": [

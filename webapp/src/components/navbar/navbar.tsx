@@ -29,7 +29,7 @@ export const Navbar = (props: NavbarProps) => {
 							title="Import from file"
 							onClick={() => importList()}
 						>
-							<UploadFile />
+							<UploadFile /> Import
 						</IconButton>
 						<IconButton
 							color="inherit"
@@ -38,7 +38,7 @@ export const Navbar = (props: NavbarProps) => {
 							title="Export to file"
 							onClick={() => exportList()}
 						>
-							<SaveAlt />
+							<SaveAlt /> Export
 						</IconButton>
 					</Box>
 				</Toolbar>
