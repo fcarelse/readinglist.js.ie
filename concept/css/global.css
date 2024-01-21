@@ -1,0 +1,17 @@
+.centered{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.pointer{
+	cursor: pointer
+}
+
+/* a[ng-click]{
+	color: blue;
+	text-decoration: underline;
+} */
+
+.ng-hide{
+	display: none;
+}
