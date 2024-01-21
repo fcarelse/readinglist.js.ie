@@ -3,11 +3,11 @@ import { BookListType } from "./pages/booklist/booklist.types";
 import { BookList } from "./pages/booklist/booklist";
 import { Navbar } from "./components/navbar/navbar";
 import { STATUS_TAGS, copyList, jsonToArray, load, save } from "./App.helper";
-import { ListExporter } from "./App.types";
 import "./App.css";
 import moment from "moment";
 import { genBlankBook } from "./pages/booklist/booklist.helper";
 import { BookType } from "./components/book/book.types";
+import { Footer } from "./components/footer/footer";
 
 function App() {
 	const [list, setList] = useState<BookListType>([]);
@@ -43,7 +43,7 @@ function App() {
 		};
 	};
 
-	const exportList: ListExporter = (list: BookListType) => {
+	const exportList = () => {
 		list.forEach((book) => {
 			if (!STATUS_TAGS.includes(book.status)) book.status = STATUS_TAGS[0];
 		});
@@ -84,10 +84,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Navbar
-				importList={() => importList()}
-				exportList={() => exportList(list)}
-			/>
+			<Navbar importList={importList} exportList={exportList} />
 			<BookList list={list} change={change} append={append} remove={remove} />
 			<div className="hidden">
 				<input
@@ -97,6 +94,7 @@ function App() {
 					onChange={loadFile}
 				/>
 			</div>
+			<Footer />
 		</div>
 	);
 }
