@@ -6,4 +6,4 @@ Deploying on readinglist.js.ie
 
 [Github](https://github.com/fcarelse/readinglist.js.ie)
 
-[Proof of Concept](https://readinglist.js.ie)
+[Proof of Concept](https://readinglist.js.ie/concept)
