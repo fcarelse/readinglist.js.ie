@@ -1,31 +1,16 @@
-import { useEffect, useState } from "react";
-import { BookListType } from "./pages/booklist/booklist.types";
 import { BookList } from "./pages/booklist/booklist";
 import { Navbar } from "./components/navbar/navbar";
-import { STATUS_TAGS, copyList, jsonToArray, load, save } from "./App.helper";
+import { STATUS_TAGS, jsonToArray, save } from "./App.helper";
 import "./App.css";
 import moment from "moment";
-import { genBlankBook } from "./pages/booklist/booklist.helper";
-import { BookType } from "./components/book/book.types";
 import { Footer } from "./components/footer/footer";
+import { useList } from "./hooks/useList/useList";
 
 function App() {
-	const [list, setList] = useState<BookListType>([]);
-
-	useEffect(() => {
-		(async () => {
-			const loaded: BookListType = await load();
-			if (loaded.length === 0) loaded.push(genBlankBook());
-			loaded.forEach((book: BookType) => {
-				if (!STATUS_TAGS.includes(book.status)) book.status = STATUS_TAGS[0];
-			});
-			setList(loaded);
-			save(loaded);
-		})();
-	}, []);
+	const { append, remove, change, list, setList } = useList();
 
 	const importList = () => {
-		document?.getElementById("importBooklist")?.click();
+		document.getElementById("importBooklist")?.click();
 	};
 
 	const loadFile = () => {
@@ -58,28 +43,6 @@ function App() {
 		document.body.appendChild(downloadLink);
 		downloadLink.click();
 		document.body.removeChild(downloadLink);
-	};
-
-	const change = (index: number, field: keyof BookType, value: string) => {
-		console.log(index, field, value);
-		const newList = copyList(list);
-		newList[index][field] = value;
-		setList(newList);
-		save(newList);
-	};
-
-	const append = (index: number) => {
-		const newList = copyList(list);
-		newList.splice(index + 1, 0, genBlankBook());
-		setList(newList);
-		save(newList);
-	};
-
-	const remove = (index: number) => {
-		const newList = copyList(list);
-		newList.splice(index, 1);
-		setList(newList);
-		save(newList);
 	};
 
 	return (
